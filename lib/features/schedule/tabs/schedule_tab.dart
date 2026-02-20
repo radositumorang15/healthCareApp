@@ -119,60 +119,67 @@ class ScheduleTab extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calendar_month_outlined,
-                            size: 15,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            '12/08/2025',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.calendar_month_outlined,
+                              size: 15,
                               color: Colors.grey,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 10),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.watch_later_outlined,
-                            size: 15,
-                            color: Colors.grey,
-                          ),
-                          Text(
-                            '10:00',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                            Text(
+                              '12/08/2025',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 10),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.watch_later_outlined,
+                              size: 15,
                               color: Colors.grey,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 10),
-                      Row(
-                        children: [
-                          Icon(Icons.circle, size: 11, color: Colors.green),
-                          SizedBox(width: 5),
-                          Text(
-                            'Confirmed',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                            Text(
+                              '10:00',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                        SizedBox(width: 10),
+                        Row(
+                          children: [
+                            Icon(Icons.circle, size: 11, color: Colors.green),
+                            SizedBox(width: 5),
+                            Text(
+                              'Confirmed',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 20),
                   Row(

@@ -33,7 +33,7 @@ class _SchedulePageState extends State<SchedulePage> with SingleTickerProviderSt
     return Scaffold(
       backgroundColor: const Color(0xFFECF1EB),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(140),
+        preferredSize: const Size.fromHeight(180),
         child: AppBar(
           toolbarHeight: 100,
           backgroundColor: const Color(0xFFECF1EB),

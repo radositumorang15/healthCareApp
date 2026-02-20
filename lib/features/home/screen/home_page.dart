@@ -94,7 +94,12 @@ class HomePage extends StatelessWidget {
             height: 50,
             child: CircleAvatar(
               backgroundColor: const Color(0xFFF9FCF8),
-              child: Icon(Icons.notifications_outlined, color: Colors.black),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/notification');
+                },
+                icon: Icon(Icons.notifications_outlined, color: Colors.black),
+              ),
             ),
           ),
         ],

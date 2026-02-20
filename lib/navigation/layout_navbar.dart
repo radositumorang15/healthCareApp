@@ -43,22 +43,27 @@ class LayoutNavbar extends StatelessWidget {
             showUnselectedLabels: false,
             backgroundColor: Colors.transparent,
             elevation: 0,
-            items: const [
+            items: [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.email_outlined), label: 'Chat'),
               BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: Container(
+                  padding: const EdgeInsets.all(10), 
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 32,
+                  ), 
+                ),
+                label: '',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.chat),
-                label: 'Chat',
-              ),
-             BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: '+',
-            ),
               BottomNavigationBarItem(
                 backgroundColor: Colors.black,
-                icon: Icon(Icons.list),
+                icon: Icon(Icons.note_alt_outlined),
                 label: 'Records',
               ),
               BottomNavigationBarItem(
