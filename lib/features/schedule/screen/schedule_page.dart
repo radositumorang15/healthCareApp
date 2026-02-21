@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../tabs/completed_tab.dart';
 import '../tabs/canceled_tab.dart';
-import '../../navigation/layout_navbar.dart';
+import '../../../navigation/layout_navbar.dart';
 import '../tabs/schedule_tab.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -135,6 +135,9 @@ class _SchedulePageState extends State<SchedulePage> with SingleTickerProviderSt
               break;
             case 4:
               Navigator.pushReplacementNamed(context, '/profile');
+              break;
+            case 5:
+              Navigator.pushReplacementNamed(context, '/medicine');
               break;
           }
         },

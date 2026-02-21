@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../navigation/layout_navbar.dart';
+import '../../../navigation/layout_navbar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -536,6 +536,9 @@ class ProfilePage extends StatelessWidget {
               break;
             case 4:
               // Already on Profile
+              break;
+            case 5:
+              Navigator.pushReplacementNamed(context, '/medicine');
               break;
           }
         },

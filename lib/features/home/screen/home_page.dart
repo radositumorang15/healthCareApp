@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../navigation/layout_navbar.dart';
+import '../../../navigation/layout_navbar.dart';
 
 class HomePage extends StatelessWidget {
   // Daftar warna menarik untuk icon
@@ -336,10 +336,11 @@ class HomePage extends StatelessWidget {
                             CircleAvatar(
                               radius: 23,
                               backgroundColor: const Color(0xFFE4EDEE),
-                              child: Icon(
-                                services[index]['icon'],
-                                color: _getRandomColor(index),
-                                size: 18,
+                              child: IconButton(
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(context, '/medicine');
+                                },
+                                icon: Icon(services[index]['icon'], color: _getRandomColor(index), size: 18),
                               ),
                             ),
                             SizedBox(width: 6),
@@ -533,6 +534,9 @@ class HomePage extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/schedule');
             case 4:
               Navigator.pushReplacementNamed(context, '/profile');
+              break;
+            case 5:
+              Navigator.pushReplacementNamed(context, '/medicine');
               break;
           }
         },

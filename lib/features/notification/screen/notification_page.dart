@@ -346,6 +346,9 @@ class NotificationPage extends StatelessWidget {
             case 4:
               Navigator.pushReplacementNamed(context, '/profile');
               break;
+            case 5:
+              Navigator.pushReplacementNamed(context, '/medicine');
+              break;
           }
         },
       ),

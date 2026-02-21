@@ -70,6 +70,10 @@ class LayoutNavbar extends StatelessWidget {
                 icon: Icon(Icons.person),
                 label: 'Profile',
               ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.medication),
+                label: 'Medicine',
+              ),
             ],
           ),
         ),

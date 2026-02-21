@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
-import '../../models/doctor.dart';
+import '../../../data/models/doctor.dart';  
 import 'package:faker/faker.dart' hide Image, Color;
 
 class ScheduleTab extends StatelessWidget {

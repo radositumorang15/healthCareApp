@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../navigation/layout_navbar.dart';
-import '../../models/chatmodel.dart';
+import '../../../navigation/layout_navbar.dart';
+import '../../../data/models/chatmodel.dart';
 import 'package:faker/faker.dart' hide Image, Color;
 
 class ChatPage extends StatelessWidget {
@@ -231,6 +231,9 @@ class ChatPage extends StatelessWidget {
               break;
             case 4:
               Navigator.pushReplacementNamed(context, '/profile');
+              break;
+            case 5:
+              Navigator.pushReplacementNamed(context, '/medicine');
               break;
           }
         },
