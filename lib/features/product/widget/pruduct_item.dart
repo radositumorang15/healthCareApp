@@ -13,7 +13,8 @@ class PruductItem extends StatelessWidget {
   final String price;
   final String quantity;
 
-  PruductItem({
+  const PruductItem({
+    super.key,
     required this.id,
     required this.name,
     required this.description,
@@ -26,9 +27,10 @@ class PruductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(
-          context,
-        ).pushNamed(DetailMedicinePage.routeName, arguments: id);
+        Navigator.of(context).pushNamed(
+          DetailMedicinePage.routeName,
+          arguments: id,
+        );
       },
       child: Card(
         elevation: 4,
@@ -98,7 +100,7 @@ class PruductItem extends StatelessWidget {
 
                   // Stok Quantity
                   Text(
-                    "Stok: ${quantity}",
+                    "Stok: $quantity",
                     style: const TextStyle(fontSize: 10, color: Colors.red),
                   ),
                 ],

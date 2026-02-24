@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../navigation/layout_navbar.dart';
+import 'package:provider/provider.dart';
+import '../../../data/providers/all_doctors.dart';
+import 'detail_doctor_page.dart';
 
 class HomePage extends StatelessWidget {
   // Daftar warna menarik untuk icon
@@ -61,6 +64,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final doctorData = Provider.of<AllDoctors>(context, listen: false);
+
     return Scaffold(
       backgroundColor: const Color(0xFFECF1EB),
       appBar: AppBar(
@@ -73,13 +78,14 @@ class HomePage extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, '/profile');
-
               },
               customBorder: const CircleBorder(),
 
               child: CircleAvatar(
                 radius: 28,
-                backgroundImage: NetworkImage('https://picsum.photos/id/20/100/100'),
+                backgroundImage: NetworkImage(
+                  'https://picsum.photos/id/20/100/100',
+                ),
               ),
             ),
           ),
@@ -135,8 +141,7 @@ class HomePage extends StatelessWidget {
         ),
         flexibleSpace: SizedBox(height: 50, width: 50),
       ),
-      body: 
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -229,79 +234,90 @@ class HomePage extends StatelessWidget {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         padding: const EdgeInsets.symmetric(horizontal: 2),
-                        itemCount: doctors.length,
+                        itemCount: doctorData.allDoctors.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            width: 115,
-                            margin: const EdgeInsets.only(right: 9),
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFF5E7F5),
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                color: const Color(0xFFECF1EB),
-                                width: 2,
+                          return InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                DetailDoctorPage.routeName,
+                                arguments: doctorData.allDoctors[index].id,
+                              );
+                            },
+                            child: Container(
+                              width: 115,
+                              margin: const EdgeInsets.only(right: 9),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF5E7F5),
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: const Color(0xFFECF1EB),
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 18,
-                                      backgroundImage: NetworkImage(
-                                        doctors[index]['image'],
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      width: 45,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFFCFCF9),
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: const Color(0xFFECF1EB),
-                                          width: 2,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 18,
+                                        backgroundImage: NetworkImage(
+                                          doctorData.allDoctors[index].imageURL,
                                         ),
                                       ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            color: Colors.yellow,
-                                            size: 12,
+                                      Spacer(),
+                                      Container(
+                                        width: 45,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFFCFCF9),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
                                           ),
-                                          Text(
-                                            '4.8',
-                                            style: TextStyle(fontSize: 10),
+                                          border: Border.all(
+                                            color: const Color(0xFFECF1EB),
+                                            width: 2,
                                           ),
-                                        ],
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.yellow,
+                                              size: 12,
+                                            ),
+                                            Text(
+                                              '4.8',
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                          ],
+                                        ),
                                       ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    doctorData.allDoctors[index].name,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                  ],
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  doctors[index]['name'],
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
                                   ),
-                                ),
-                                Text(
-                                  doctors[index]['specialization'],
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.grey,
+                                  Text(
+                                    doctorData.allDoctors[index].specialization,
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.grey,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -338,9 +354,16 @@ class HomePage extends StatelessWidget {
                               backgroundColor: const Color(0xFFE4EDEE),
                               child: IconButton(
                                 onPressed: () {
-                                  Navigator.pushReplacementNamed(context, '/medicine');
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    '/medicine',
+                                  );
                                 },
-                                icon: Icon(services[index]['icon'], color: _getRandomColor(index), size: 18),
+                                icon: Icon(
+                                  services[index]['icon'],
+                                  color: _getRandomColor(index),
+                                  size: 18,
+                                ),
                               ),
                             ),
                             SizedBox(width: 6),
@@ -397,119 +420,117 @@ class HomePage extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     itemCount: doctors.length,
                     itemBuilder: (context, index) {
-                          // return ListTile(
-                          //   title: Text(doctors[index]['name']),
-                          //   subtitle: Text(doctors[index]['specialization']),
-                          //   trailing: Text(doctors[index]['schedule']),
-                          // );
-                          return Container(
-                            padding: const EdgeInsets.all(16),
-                            margin: const EdgeInsets.only(bottom: 16),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFCFCF9),
-                              borderRadius: BorderRadius.circular(22),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                      // return ListTile(
+                      //   title: Text(doctors[index]['name']),
+                      //   subtitle: Text(doctors[index]['specialization']),
+                      //   trailing: Text(doctors[index]['schedule']),
+                      // );
+                      return Container(
+                        padding: const EdgeInsets.all(16),
+                        margin: const EdgeInsets.only(bottom: 16),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFCFCF9),
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
-                                Row(
+                                CircleAvatar(
+                                  radius: 24,
+                                  backgroundImage: NetworkImage(
+                                    doctors[index]['image'] ?? '',
+                                  ),
+                                ),
+                                SizedBox(width: 16),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CircleAvatar(
-                                      radius: 24,
-                                      backgroundImage: NetworkImage(
-                                        doctors[index]['image'] ?? '',
+                                    Text(
+                                      doctors[index]['name'],
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(width: 16),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          doctors[index]['name'],
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          doctors[index]['specialization'],
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Spacer(),
-                                    Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 22,
-                                          backgroundColor: const Color(
-                                            0xFFE4EDEE,
-                                          ),
-                                          child: Icon(
-                                            Icons.chat_bubble_outline,
-                                            size: 20,
-                                            color: Colors.blue,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 12),
-
-                                        Center(
-                                          child: Container(
-                                            width: 40,
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFFE4EDEE),
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              gradient: LinearGradient(
-                                                begin: Alignment.topCenter,
-                                                end: Alignment.bottomCenter,
-                                                colors: [
-                                                  Color(0xFFF5D37A),
-                                                  Color(0xFF57C785),
-                                                ],
-                                                stops: [0.0, 1.0],
-                                              ),
-                                            ),
-                                            child: Icon(
-                                              Icons.call,
-                                              size: 20,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      doctors[index]['specialization'],
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 16),
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: double.infinity,
-                                  padding: EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Text(
-                                    doctors[index]['schedule'],
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
+                                Spacer(),
+                                Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 22,
+                                      backgroundColor: const Color(0xFFE4EDEE),
+                                      child: Icon(
+                                        Icons.chat_bubble_outline,
+                                        size: 20,
+                                        color: Colors.blue,
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(width: 12),
+
+                                    Center(
+                                      child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFFE4EDEE),
+                                          borderRadius: BorderRadius.circular(
+                                            50,
+                                          ),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.topCenter,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Color(0xFFF5D37A),
+                                              Color(0xFF57C785),
+                                            ],
+                                            stops: [0.0, 1.0],
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.call,
+                                          size: 20,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          );
-                        },
-                      ),
+                            SizedBox(height: 16),
+                            Container(
+                              alignment: Alignment.center,
+                              width: double.infinity,
+                              padding: EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Text(
+                                doctors[index]['schedule'],
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ],

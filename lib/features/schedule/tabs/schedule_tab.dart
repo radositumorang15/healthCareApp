@@ -13,6 +13,7 @@ class ScheduleTab extends StatelessWidget {
   final List<Doctor> doctors = List.generate(
     10,
     (index) => Doctor(
+      id: index.toString(),
       name: faker.person.name(),
       specialization: faker.job.title(),
       imageURL: 'https://picsum.photos/id/$index/200',
